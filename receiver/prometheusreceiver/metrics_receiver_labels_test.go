@@ -593,7 +593,6 @@ func verifyHonorLabelsTrue(t *testing.T, td *testData, rms []pmetric.ResourceMet
 	expectedResourceAttributes.PutStr("net.host.port", "8080")
 	expectedResourceAttributes.PutStr("server.address", "hostname")
 	expectedResourceAttributes.PutStr("net.host.name", "hostname")
-	expectedResourceAttributes.PutStr("job", "honor_labels_test")
 
 	expectedScrapeConfigAttributes := td.attributes
 
@@ -633,7 +632,7 @@ func verifyHonorLabelsTrue(t *testing.T, td *testData, rms []pmetric.ResourceMet
 				numberPointComparator: []numberPointComparator{
 					compareTimestamp(ts1),
 					compareDoubleValue(1),
-					compareAttributes(map[string]string{"testLabel": "value1"}),
+					compareAttributes(map[string]string{"testLabel": "value1", "job": "honor_labels_test"}),
 				},
 			},
 		})(t, resourceMetric)
